@@ -29,7 +29,7 @@ def test_that_correct_binary_representation_of_expression_is_sent_on_socket():
 
     with patch('calculator_client.UDP_client.socket', new=socket_mock):
         calculate('(2+2)*5/7-3+sde', '')
-        socket_mock.socket().__enter__().sendto.assert_called_once_with(b'(2+2)*5/7-3+sde',('', 9010))
+        socket_mock.socket().__enter__().sendto.assert_called_once_with(b'(2+2)*5/7-3+sde', ('', 9011))
 
 
 def test_that_server_address_is_passed_to_socket():
@@ -37,7 +37,7 @@ def test_that_server_address_is_passed_to_socket():
 
     with patch('calculator_client.UDP_client.socket', new=socket_mock):
         calculate('2+2', '127.0.0.1')
-        socket_mock.socket().__enter__().sendto.assert_called_once_with(b'2+2', ('127.0.0.1', 9010))
+        socket_mock.socket().__enter__().sendto.assert_called_once_with(b'2+2', ('127.0.0.1', 9011))
 
 
 def test_that_returned_error_message_is_converted_to_exception():

@@ -6,7 +6,7 @@ class CommunicationError(Exception):
         self.message = message
 
 
-PORT = 9010
+PORT = 9011
 
 
 def get_result(expression: str, server_address: str):
