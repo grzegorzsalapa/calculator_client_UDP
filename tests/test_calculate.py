@@ -28,12 +28,12 @@ def test_that_correct_binary_representation_of_expression_is_sent_on_socket():
     socket_mock = _set_up_mocked_calculator_socket(recv_value=b'6')
 
     with patch('calculator_client.UDP_client.socket', new=socket_mock):
-        calculate('(2+2)*5/7-3+sde', '')
-        socket_mock.socket().__enter__().sendto.assert_called_once_with(b'(2+2)*5/7-3+sde', ('', 9011))
+        calculate('(2+2)*5/7-3+sde', '127.0.0.1')
+        socket_mock.socket().__enter__().sendto.assert_called_once_with(b'(2+2)*5/7-3+sde', ('127.0.0.1', 9011))
 
 
 def test_that_server_address_is_passed_to_socket():
-    socket_mock = _set_up_mocked_calculator_socket(recv_value=b'6')
+    socket_mock = _set_up_mocked_calculator_socket(recv_value=b'4')
 
     with patch('calculator_client.UDP_client.socket', new=socket_mock):
         calculate('2+2', '127.0.0.1')
@@ -45,4 +45,4 @@ def test_that_returned_error_message_is_converted_to_exception():
 
     with pytest.raises(CalculationError, match=r"Example error message."):
         with patch('calculator_client.UDP_client.socket', new=socket_mock):
-            calculate('any_expression', 'any_address')
+            calculate('invalid_expression', 'any_address')
