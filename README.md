@@ -1,4 +1,4 @@
-# Calculator client
+# Calculator client UDP
 
 Small client application to communicate with "calculator_server_UDP".
 
